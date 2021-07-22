@@ -1,0 +1,42 @@
+/*
+ *
+ *
+ Client had descriptions and testimonials for
+ different product use cases. To keep thing easy 
+ for the the user, the content is hidden until 
+ the category is selected.
+ 
+ For desktop we used circle images for each categoy
+ and for mobile we used a drop down. This code
+ covers each. Also, this uses div IDs to work
+ dynamically.
+ 
+ Can be seen at https://bi-tapp.com/general-use/
+ *
+ *
+ */
+
+<script>
+	// Circles Testimonials popups & styling changes
+$(document).ready(function(){
+	
+	$('.bt-content').hide();
+	
+	$('.bt-circles-row>.bt-button').on('click', function() {
+		$('.bt-button').not(this).removeClass('bt-button-active');
+		$(this).addClass('bt-button-active');
+		var thisIdContent = '#' + $(this).attr('id') + '-content';
+		console.log(thisIdContent);
+		$(thisIdContent).show();
+		$('.bt-content').not(thisIdContent).hide();
+	});
+	
+	$('#bt-myDropdown p').on('click', function() {
+		var thisDropdownIdContent = '#' + $(this).attr('id') + '-content';
+		console.log(thisDropdownIdContent);
+		$(thisDropdownIdContent).show();
+		$('.bt-content').not(thisDropdownIdContent).hide();
+	});
+	
+});
+</script>
