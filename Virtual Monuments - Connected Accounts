@@ -1,3 +1,32 @@
+/*
+ *
+ *
+ In BuddyPress, there is currently no way to have
+ someone easily switch between multiple accounts for
+ different people (like how Instagram or other social
+ media sites do). This also prevents parent and child
+ account heirarchies.
+ 
+ This code essentially mimics this feature and allows
+ users to quickly and easily switch between different
+ accounts that are Connected by the same email address.
+ 
+ Requires 2 different plugins to work:
+ 
+	 Allow Multiple Accounts - by Scott Reilly
+	 • https://wordpress.org/plugins/allow-multiple-accounts/
+
+	 User Switching - by John Blackbourn and contributors
+	 • https://wordpress.org/plugins/user-switching/
+ 
+ Works only for logged-in users so there is no public
+ way to see this in action. But the website it is on is
+ Virtual Monuments: https://virtualmonuments.net
+ *
+ *
+ */
+
+
 <?php
 
 add_shortcode( 'show_multi_accounts', 'show_multi_accounts' );
