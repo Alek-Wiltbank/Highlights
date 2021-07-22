@@ -1,0 +1,96 @@
+/*
+ *
+ *
+ Tilden Park Golf Club uses a software called Golf 
+ Genius to keep track of tournaments and tournament 
+ results. These results can only be embedded via iframe.
+ 
+ This code dynamically changes the "src" url property on 
+ click to show the correct iframe. There are 2 variables, 
+ Year and Tournament.
+ 
+ Can be seen at https://tilden-park-golf-club.flywheelsites.com/tournaments/
+ *
+ *
+ */
+
+
+
+
+<script>
+  // Dynamic Golf Genius Tournaments 
+jQuery(function($){
+  $(document).ready(function(){
+     
+
+  
+    // Dropdown Button - Year
+    $('#mobile-results #myYearFunction').on('click', function() {
+      document.getElementById("tpgc-myYearDropdown").classList.toggle("show");
+    });
+
+    // Dropdown Button - Tournament
+    $('#mobile-results #myTournamentFunction').on('click', function() {
+      document.getElementById("tpgc-myTournamentDropdown").classList.toggle("show");
+    });
+
+    $('#mobile-results .dropdown-content div').on('click', function() {
+      $('#tpgc-myTournamentDropdown').removeClass('show');
+      $('#tpgc-myYearDropdown').removeClass('show');
+    });
+
+
+
+
+    // Define Variables
+    var yearTitle = $('#mobile-results .tpgc-year-container div:first-child').attr('title');
+    var yearId = $('#mobile-results .tpgc-year-container div:first-child').attr('id');
+    var yearIdSelector = '#' + yearId;
+    var tournamentTitle = $('#mobile-results .tpgc-tournament-container div:first-child').attr('title');
+    var tournamentId = $('#mobile-results .tpgc-tournament-container div:first-child').attr('id');
+    var tournamentIdSelector = '#' + tournamentId;
+    
+
+    // Update iFrame function
+    function resultsUpdate() {
+      $('#mobile-results .tpgc-upcoming-tournaments').removeClass('tpgc-results-selector-active');
+      $('#mobile-results .tpgc-results-iframe').html('<iframe width="1000" height="420" src="https://www.golfgenius.com/leagues/4022659397325974957/customer_directories/' + tournamentId + '/directory_iframe?league=4022659397325974957&season_id=' + yearId + '" frameborder="0" allowfullscreen=false></iframe>');
+      $('#mobile-results .tpgc-results-title').html('<h2>' + yearTitle + ' ' + tournamentTitle + '</h2>');
+    };
+
+
+    // When user clicks on year
+    $('#mobile-results .tpgc-year').on('click', function() {
+      yearId = $(this).attr('id');
+      yearTitle = $(this).attr('title');
+	    tournamentIdSelector = '#' + tournamentId;
+      $(tournamentIdSelector).addClass('tpgc-tournament-active');
+      $(this).addClass('tpgc-year-active tpgc-results-selector-active');
+      $('#mobile-results .tpgc-year').not(this).removeClass('tpgc-year-active tpgc-results-selector-active');
+      resultsUpdate();
+    });
+
+
+    // When user clicks on tournament
+    $('#mobile-results .tpgc-tournament').on('click', function() {
+      tournamentId = $(this).attr('id');
+      tournamentTitle = $(this).attr('title');
+	    yearIdSelector = '#' + yearId;
+      $(yearIdSelector).addClass('tpgc-year-active');
+      $(this).addClass('tpgc-tournament-active tpgc-results-selector-active');
+      $('#mobile-results .tpgc-tournament').not(this).removeClass('tpgc-tournament-active tpgc-results-selector-active');
+      resultsUpdate();
+    });
+
+
+    // When user clicks on Upcoming Tournaments
+    $('#mobile-results .tpgc-upcoming-tournaments').on('click', function() {
+      $('#mobile-results .tpgc-tournament, #mobile-results .tpgc-year').removeClass('tpgc-tournament-active tpgc-year-active');
+      $('#mobile-results .tpgc-results-iframe').html('<iframe width="1000" height="420" src="https://www.golfgenius.com/leagues/4022659397325974957/customer_directories/7494275603709848988/directory_iframe?league=4022659397325974957" frameborder="0" allowfullscreen=false></iframe>');
+      $('#mobile-results .tpgc-results-title').html('<h2>Upcoming Tournaments</h2>');
+    });
+
+
+  });
+});
+</script>
